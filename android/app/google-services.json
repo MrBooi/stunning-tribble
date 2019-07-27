@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "114492121133",
+    "firebase_url": "https://crossysocialapp.firebaseio.com",
+    "project_id": "crossysocialapp",
+    "storage_bucket": "crossysocialapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114492121133:android:adea4e0e0c2d8bad",
+        "android_client_info": {
+          "package_name": "com.ayabongaBooi.crossySocialApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114492121133-ibka2bo68oq40g7rrvkc1t5u77o2gukb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ayabongaBooi.crossySocialApp",
+            "certificate_hash": "5b0e1ae404148916d7e29be366955baa95dc2108"
+          }
+        },
+        {
+          "client_id": "114492121133-ujs43hn7uj0a3a8c6fmh1qsgme17ehg4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRmeyI403m-GmtleKJ-IRUxMSDeX_R_88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114492121133-ujs43hn7uj0a3a8c6fmh1qsgme17ehg4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "114492121133-qkq99nc4h255c3qpkd03mog3ptmr5lnj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ayabongaBooi.crossySocialApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
