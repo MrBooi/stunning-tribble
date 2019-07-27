@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-header(context, {bool isAppTitle = false, String titleText}) {
+header(context,
+    {bool isAppTitle = false, String titleText, removeBackButton = false}) {
   return AppBar(
-    //  leading: isAppTitle ? Container() : Icon(Icons.arrow_back),
+    automaticallyImplyLeading: removeBackButton ? false : true,
     title: Text(
       isAppTitle ? 'Crossy Social App' : titleText,
       style: TextStyle(
