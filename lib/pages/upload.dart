@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttershare/pages/home.dart';
 import 'package:fluttershare/widgets/progress.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
@@ -142,7 +143,7 @@ class _UploadState extends State<Upload> {
     locationController.clear();
     setState(() {
       file = null;
-      isUploading = false; 
+      isUploading = false;
       postId = Uuid().v4();
     });
   }
@@ -246,7 +247,7 @@ class _UploadState extends State<Upload> {
             alignment: Alignment.center,
             child: RaisedButton.icon(
               color: Colors.blue,
-              onPressed: () => print('current location'),
+              onPressed: getUserLocation,
               label: Text(
                 "use current location",
                 style: TextStyle(color: Colors.white),
@@ -263,6 +264,16 @@ class _UploadState extends State<Upload> {
         ],
       ),
     );
+  }
+
+  getUserLocation() async {
+    Position postion = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    List<Placemark> placemarks = await Geolocator()
+        .placemarkFromCoordinates(postion.latitude, postion.longitude);
+    Placemark placemark = placemarks[0];
+    String formattedAddress = '${placemark.locality} , ${placemark.country}';
+    locationController.text = formattedAddress;
   }
 
   @override

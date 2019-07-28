@@ -11,7 +11,7 @@ header(context,
           fontFamily: isAppTitle ? 'Signatra' : '',
           fontSize: isAppTitle ? 50.0 : 22.0),
     ),
-    centerTitle: isAppTitle ? true : false,
+    centerTitle: true,
     backgroundColor: Theme.of(context).primaryColor,
   );
 }
