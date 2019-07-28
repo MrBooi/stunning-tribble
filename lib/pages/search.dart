@@ -15,6 +15,7 @@ class _SearchState extends State<Search> {
   TextEditingController searchController = TextEditingController();
   Future<QuerySnapshot> searchResultsFuture;
   handleSearch(String query) {
+    print('here');
     Future<QuerySnapshot> users = userRef
         .where('displayName', isGreaterThanOrEqualTo: query)
         .getDocuments();
@@ -41,10 +42,10 @@ class _SearchState extends State<Search> {
           ),
           suffixIcon: IconButton(
             icon: Icon(Icons.clear),
-            onPressed: () => clearSearch,
+            onPressed:  clearSearch,
           ),
         ),
-        onEditingComplete: () => handleSearch,
+        onFieldSubmitted: handleSearch,
       ),
     );
   }
