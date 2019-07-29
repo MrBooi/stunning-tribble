@@ -38,6 +38,12 @@ class _EditProfileState extends State<EditProfile> {
     });
   }
 
+  handleEditProfile() {
+    userRef.document(widget?.currentUserId).updateData(
+        {'displayName': displayNameController.text, 'bio': bioController.text});
+    Navigator.pop(context);
+  }
+
   Column buildDisplayNameField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,7 +105,7 @@ class _EditProfileState extends State<EditProfile> {
               size: 30.0,
               color: Colors.green,
             ),
-            onPressed: () => Navigator.pop(context),
+            onPressed: handleEditProfile
           )
         ],
       ),
