@@ -5,6 +5,8 @@ import 'package:fluttershare/models/user.dart';
 import 'package:fluttershare/pages/timeline.dart';
 import 'package:fluttershare/widgets/progress.dart';
 
+import 'home.dart';
+
 class EditProfile extends StatefulWidget {
   final String currentUserId;
   EditProfile({this.currentUserId});
@@ -37,6 +39,11 @@ class _EditProfileState extends State<EditProfile> {
       isLoading = false;
     });
   }
+
+  logOut() {
+    googleSignIn.signOut();
+  }
+
 
   handleEditProfile() {
     userRef.document(widget?.currentUserId).updateData(
@@ -146,7 +153,7 @@ class _EditProfileState extends State<EditProfile> {
                       Padding(
                         padding: EdgeInsets.all(16.0),
                         child: FlatButton.icon(
-                          onPressed: () => print('logout'),
+                          onPressed: logOut,
                           icon: Icon(
                             Icons.cancel,
                             color: Colors.red,
