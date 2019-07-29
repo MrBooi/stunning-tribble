@@ -21,9 +21,10 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  bool isFollowing = false;
   final String currentUserId = currentUser?.id;
   bool isLoading = false;
-  String postViewOrientation = 'list';
+  String postViewOrientation = 'grid';
   int postCount = 0;
   List<Post> posts = [];
 
@@ -82,13 +83,15 @@ class _ProfileState extends State<Profile> {
           height: 27.0,
           child: Text(
             label,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: isFollowing ? Colors.black : Colors.white,
+                fontWeight: FontWeight.bold),
           ),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-              color: Colors.blue,
+              color: isFollowing ? Colors.black : Colors.blue,
               border: Border.all(
-                color: Colors.blue,
+                color: isFollowing ? Colors.grey : Colors.blue,
               ),
               borderRadius: BorderRadius.circular(5.0)),
         ),
@@ -102,10 +105,16 @@ class _ProfileState extends State<Profile> {
     }));
   }
 
+  handleUnFollowUser() {}
+  handleFollowUser() {}
   buildProfileButton() {
     bool isProfileOwner = currentUserId == widget.profileId;
     if (isProfileOwner) {
       return buildButton(label: 'Edit Profile', function: editProfile);
+    } else if (isFollowing) {
+      return buildButton(label: 'unFollow', function: handleUnFollowUser);
+    } else if (!isFollowing) {
+      return buildButton(label: 'Follow', function: handleFollowUser);
     }
   }
 
@@ -219,15 +228,15 @@ class _ProfileState extends State<Profile> {
           ),
         );
       });
-       return GridView.count(
-          crossAxisCount: 3,
-          childAspectRatio: 1.0,
-          mainAxisSpacing: 1.5,
-          crossAxisSpacing: 1.5,
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          children: gridTiles,
-        );
+      return GridView.count(
+        crossAxisCount: 3,
+        childAspectRatio: 1.0,
+        mainAxisSpacing: 1.5,
+        crossAxisSpacing: 1.5,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        children: gridTiles,
+      );
     } else if (postViewOrientation == "list") {
       return Column(
         children: posts,
@@ -271,7 +280,7 @@ class _ProfileState extends State<Profile> {
           children: <Widget>[
             buildProfileHeader(),
             Divider(),
-           buildTogglePostView(),
+            buildTogglePostView(),
             Divider(
               height: 0.0,
             ),
