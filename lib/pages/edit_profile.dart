@@ -42,8 +42,8 @@ class _EditProfileState extends State<EditProfile> {
 
   logOut() {
     googleSignIn.signOut();
+    Navigator.pop(context);
   }
-
 
   handleEditProfile() {
     userRef.document(widget?.currentUserId).updateData(
@@ -107,13 +107,12 @@ class _EditProfileState extends State<EditProfile> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(
-              Icons.done,
-              size: 30.0,
-              color: Colors.green,
-            ),
-            onPressed: handleEditProfile
-          )
+              icon: Icon(
+                Icons.done,
+                size: 30.0,
+                color: Colors.green,
+              ),
+              onPressed: handleEditProfile)
         ],
       ),
       body: isLoading
@@ -153,7 +152,9 @@ class _EditProfileState extends State<EditProfile> {
                       Padding(
                         padding: EdgeInsets.all(16.0),
                         child: FlatButton.icon(
-                          onPressed: logOut,
+                          onPressed: () {
+                            logOut();
+                          },
                           icon: Icon(
                             Icons.cancel,
                             color: Colors.red,

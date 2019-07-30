@@ -16,6 +16,8 @@ final usersRef = Firestore.instance.collection('users');
 final postRef = Firestore.instance.collection('posts');
 final commentRef = Firestore.instance.collection('comments');
 final activityFeedRef = Firestore.instance.collection('feed');
+final followerRef = Firestore.instance.collection('followers');
+final followingRef = Firestore.instance.collection('following');
 final DateTime timestamp = DateTime.now();
 User currentUser;
 
@@ -91,6 +93,7 @@ class _HomeState extends State<Home> {
   login() {
     // open google modal
     googleSignIn.signIn();
+    
   }
 
   logOut() {
