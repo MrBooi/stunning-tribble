@@ -11,7 +11,8 @@ class Search extends StatefulWidget {
   _SearchState createState() => _SearchState();
 }
 
-class _SearchState extends State<Search> {
+class _SearchState extends State<Search>
+    with AutomaticKeepAliveClientMixin<Search> {
   TextEditingController searchController = TextEditingController();
   Future<QuerySnapshot> searchResultsFuture;
   handleSearch(String query) {
@@ -42,7 +43,7 @@ class _SearchState extends State<Search> {
           ),
           suffixIcon: IconButton(
             icon: Icon(Icons.clear),
-            onPressed:  clearSearch,
+            onPressed: clearSearch,
           ),
         ),
         onFieldSubmitted: handleSearch,
@@ -78,6 +79,7 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     buildsearchResults() {
       return FutureBuilder(
         future: searchResultsFuture,
@@ -103,6 +105,9 @@ class _SearchState extends State<Search> {
           searchResultsFuture == null ? buildNoContent() : buildsearchResults(),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class UserResult extends StatelessWidget {
