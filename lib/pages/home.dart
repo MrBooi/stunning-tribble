@@ -7,6 +7,7 @@ import 'package:fluttershare/pages/activity_feed.dart';
 import 'package:fluttershare/pages/create_account.dart';
 import 'package:fluttershare/pages/profile.dart';
 import 'package:fluttershare/pages/search.dart';
+import 'package:fluttershare/pages/timeline.dart';
 import 'package:fluttershare/pages/upload.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -18,6 +19,7 @@ final commentRef = Firestore.instance.collection('comments');
 final activityFeedRef = Firestore.instance.collection('feed');
 final followerRef = Firestore.instance.collection('followers');
 final followingRef = Firestore.instance.collection('following');
+final timelineRef = Firestore.instance.collection('timeline');
 final DateTime timestamp = DateTime.now();
 User currentUser;
 
@@ -79,6 +81,11 @@ class _HomeState extends State<Home> {
         'bio': '',
         'timestamp': timestamp
       });
+      
+       await followerRef.document(user?.id)
+        .collection('userFollowers')
+        .document(user?.id).setData({});
+
       doc = await usersRef.document(user.id).get();
     }
     currentUser = User.fromDocument(doc);
@@ -93,7 +100,6 @@ class _HomeState extends State<Home> {
   login() {
     // open google modal
     googleSignIn.signIn();
-    
   }
 
   logOut() {
@@ -115,11 +121,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: PageView(
         children: <Widget>[
-          // Timeline(),
-          RaisedButton(
-            child: Text('LogOut'),
-            onPressed: logOut,
-          ),
+          Timeline(currentUser: currentUser),
           ActivityFeed(),
           Upload(currentUser: currentUser),
           Search(),
